@@ -1,11 +1,18 @@
-# MINDLOCK — Challenge Your Mind
+# MINDLOCK — Crack the Code
 
-A fun and challenging math puzzle game to test your skills and sharpen your mind.
+MINDLOCK is a small, offline-friendly colour-code logic puzzle.
 
-## Current version
+## How to play
+- Crack a hidden sequence of four different colours.
+- Choose four colours and submit a guess.
+- Mint clue pegs show correct colours in the correct positions.
+- Violet clue pegs show correct colours in the wrong positions.
+- Solve the code in 10 attempts.
 
-This repository currently contains the first UI prototype of MINDLOCK's Math Rush challenge. The next step is to review the design and then build out the full gameplay.
+## Run
+Open `index.html` in a modern browser. The game uses only local HTML, CSS, and JavaScript. It does not need an account, external libraries, analytics, or a server.
 
-## Run locally
-
-Open `index.html` in a modern web browser. No build tools are required.
+## Project files
+- `index.html` — page structure
+- `style.css` — responsive interface
+- `script.js` — puzzle rules and game logic
