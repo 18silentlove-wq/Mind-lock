@@ -1,95 +1,64 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#101522">
-  <meta name="description" content="MINDLOCK is an offline logic puzzle. Crack the hidden colour code using clues and deduction.">
-  <title>MINDLOCK — Crack the Code</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#080e20">
+<title>MINDLOCK — Arithmetic Challenge</title>
+<style>
+:root{color-scheme:dark;--bg:#080e20;--panel:#111b33;--muted:#9aa8c4;--white:#f4f7ff;--cyan:#58e6ff;--green:#36e39a;--yellow:#ffd45c;--red:#ff647c}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% -20%,#1b3158 0,transparent 55%),var(--bg);color:var(--white);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;display:flex;justify-content:center;padding:22px 14px}
+.app{width:100%;max-width:430px}.topbar{display:flex;align-items:center;justify-content:space-between;margin:4px 2px 28px}.logo{border:1px solid #52627e;border-radius:10px;padding:8px 13px;font-size:19px;font-weight:900;letter-spacing:3px;background:#101a30;box-shadow:0 0 18px #49dfff18}.logo span{background:linear-gradient(90deg,#ff9933 0 34%,#fff 34% 67%,#35c879 67%);background-clip:text;color:transparent}.gear{width:42px;height:42px;border:1px solid #34435f;border-radius:12px;background:#121d34;color:#eaf2ff;font-size:21px;cursor:pointer}.game-card{position:relative;padding:25px 21px 22px;border-radius:22px;background:linear-gradient(150deg,#172541,#0d162b 70%);isolation:isolate;box-shadow:0 20px 60px #0007;overflow:hidden}.game-card:before{content:"";position:absolute;inset:-2px;border-radius:24px;padding:2px;background:conic-gradient(from var(--angle,0deg),transparent 0 22%,#35d9ff 32%,#7966ff 45%,transparent 58% 75%,#35d9ff 88%,transparent);animation:spin 7s linear infinite;z-index:-2}.game-card:after{content:"";position:absolute;inset:2px;border-radius:20px;background:linear-gradient(150deg,#172541,#0d162b 70%);z-index:-1}@property --angle{syntax:"<angle>";initial-value:0deg;inherits:false}@keyframes spin{to{--angle:360deg}}
+.card-top{display:flex;justify-content:space-between;align-items:center}.eyebrow,.level{font-size:11px;letter-spacing:2px;color:#9eacc8;font-weight:800}.level strong{color:var(--cyan);font-size:15px;margin-left:5px}.timer-wrap{display:flex;align-items:center;gap:9px}.timer{font-size:30px;font-weight:900;line-height:1;font-variant-numeric:tabular-nums;color:var(--green);min-width:45px;text-align:right}.timer.yellow{color:var(--yellow)}.timer.red{color:var(--red);animation:pulse .7s infinite alternate}@keyframes pulse{to{opacity:.55}}.timer-label{font-size:9px;letter-spacing:1.5px;color:#9eacc8}
+.progress{height:5px;border-radius:8px;background:#283651;margin:18px 0 31px;overflow:hidden}.progress-fill{height:100%;width:100%;background:var(--green);transition:width .3s linear,background .2s}
+.question-box{text-align:center;padding:8px 0 24px}.question-label{font-size:10px;letter-spacing:2.5px;color:#91a0bd;font-weight:800}.question{font-size:clamp(37px,10vw,48px);font-weight:900;letter-spacing:1px;margin:12px 0 0;color:#fff}.answers{display:grid;grid-template-columns:1fr 1fr;gap:12px}.answer{min-height:67px;border:1px solid #3a4b6b;border-radius:14px;background:linear-gradient(145deg,#1b2b49,#142039);color:#f4f7ff;font-size:23px;font-weight:850;cursor:pointer;transition:transform .12s,border-color .12s,background .12s}.answer:active{transform:scale(.97)}.answer:disabled{cursor:default;opacity:.8}.answer:hover:not(:disabled){border-color:var(--cyan);background:#203758}.feedback{min-height:27px;text-align:center;margin:18px 0 9px;font-size:13px;font-weight:850;letter-spacing:1px}.correct-text{color:var(--green)}.wrong-text{color:var(--red)}.controls{display:flex;gap:10px;margin-top:10px}.control{flex:1;min-height:48px;border:0;border-radius:12px;font-size:12px;font-weight:900;letter-spacing:1.3px;cursor:pointer}.primary{background:linear-gradient(100deg,#27c8e8,#6c83ff);color:#061224;box-shadow:0 7px 22px #31d6f52b}.secondary{background:#263550;color:#e8efff;border:1px solid #405171}.control:disabled{opacity:.4;cursor:not-allowed}.hint{text-align:center;color:#8291ad;font-size:10px;line-height:1.5;margin:18px 3px 0}
+.modal{position:fixed;inset:0;z-index:5;background:#030817d9;display:grid;place-items:center;padding:20px}.modal[hidden]{display:none}.modal-card{width:min(100%,360px);padding:25px;border:1px solid #405276;border-radius:20px;background:#121e36;box-shadow:0 20px 70px #000b}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.modal h2{margin:0;font-size:20px}.close{border:0;background:transparent;color:#dce7ff;font-size:25px;cursor:pointer}.setting-row{display:flex;justify-content:space-between;align-items:center;color:#dce7ff;font-size:14px;padding:15px 0;border-top:1px solid #293954}.setting-row input{width:20px;height:20px;accent-color:#48d8ed}.result-icon{font-size:38px;text-align:center;margin-bottom:8px}.result-card{text-align:center}.result-card p{color:#aebbd4;line-height:1.5}.result-card .control{width:100%;margin-top:10px}
+@media(max-width:360px){body{padding:14px 10px}.game-card{padding:21px 15px}.answer{min-height:60px}.logo{font-size:17px}}
+</style>
 </head>
 <body>
-  <div class="page-shell">
-    <header class="topbar">
-      <a class="brand" href="./" aria-label="MINDLOCK home"><span class="brand-icon">M</span><span>MINDLOCK</span></a>
-      <span class="offline-tag"><i></i> OFFLINE PUZZLE</span>
-    </header>
-
-    <main>
-      <section class="intro">
-        <p class="eyebrow">LOGIC · DEDUCTION · STRATEGY</p>
-        <h1>Crack the <span>code.</span></h1>
-        <p class="intro-copy">A secret sequence is locked. Use the clues, think carefully, and unlock it before your attempts run out.</p>
-      </section>
-
-      <section class="game-layout" aria-label="Mastermind logic puzzle">
-        <div class="board-card">
-          <div class="board-heading">
-            <div><p class="section-label">THE CHALLENGE</p><h2>Codebreaker</h2></div>
-            <div class="attempt-counter"><strong id="attemptsLeft">10</strong><span>TRIES LEFT</span></div>
-          </div>
-
-          <div class="legend">
-            <span><i class="peg exact"></i> Right colour, right place</span>
-            <span><i class="peg close"></i> Right colour, wrong place</span>
-          </div>
-
-          <div id="history" class="history" aria-live="polite">
-            <div class="empty-state"><span class="lock-symbol">⌁</span><strong>Your attempts will appear here</strong><small>Choose four colours below to make your first guess.</small></div>
-          </div>
-
-          <div class="current-guess">
-            <div class="guess-title"><span class="section-label">YOUR GUESS</span><span id="selectionCount">0 / 4 selected</span></div>
-            <div id="slots" class="slots" aria-label="Current four colour slots">
-              <button class="slot" data-slot="0" aria-label="Slot 1, empty">+</button>
-              <button class="slot" data-slot="1" aria-label="Slot 2, empty">+</button>
-              <button class="slot" data-slot="2" aria-label="Slot 3, empty">+</button>
-              <button class="slot" data-slot="3" aria-label="Slot 4, empty">+</button>
-            </div>
-            <p class="helper" id="helper">Pick four different colours. Tap a filled slot to remove it.</p>
-            <div class="palette-title"><span class="section-label">COLOUR KEYS</span><span>6 colours · no repeats</span></div>
-            <div id="palette" class="palette" aria-label="Choose a colour"></div>
-            <div class="actions">
-              <button id="clearBtn" class="button secondary" type="button">Clear</button>
-              <button id="submitBtn" class="button primary" type="button" disabled>Submit guess <span>→</span></button>
-            </div>
-          </div>
-        </div>
-
-        <aside class="side-column">
-          <div class="info-card">
-            <p class="section-label">HOW TO PLAY</p>
-            <h3>Read the clues.</h3>
-            <ol class="rules">
-              <li><b>01</b><span>Find the hidden sequence of four different colours.</span></li>
-              <li><b>02</b><span>Choose four colours and submit your guess.</span></li>
-              <li><b>03</b><span>Use the clue pegs to improve your next guess.</span></li>
-            </ol>
-          </div>
-          <div class="info-card objective">
-            <span class="target-icon">◎</span>
-            <p class="section-label">YOUR OBJECTIVE</p>
-            <h3>Think. Test. Unlock.</h3>
-            <p>Break the code in 10 attempts. Every guess gives you information.</p>
-          </div>
-          <button id="newGameBtn" class="button restart" type="button">↻ Start new game</button>
-        </aside>
-      </section>
-    </main>
-
-    <footer><span>© 2026 MINDLOCK</span><span>BUILT FOR CURIOUS MINDS</span></footer>
-  </div>
-
-  <div id="resultModal" class="modal" hidden>
-    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="resultTitle">
-      <div id="resultIcon" class="result-icon">✦</div>
-      <p class="section-label">CHALLENGE COMPLETE</p>
-      <h2 id="resultTitle">Code cracked!</h2>
-      <p id="resultText">You solved the puzzle.</p>
-      <div id="secretReveal" class="secret-reveal"></div>
-      <button id="playAgainBtn" class="button primary" type="button">Play again <span>→</span></button>
-    </div>
-  </div>
-  <script src="script.js"></script>
+<main class="app">
+<header class="topbar"><div class="logo"><span>MINDLOCK</span></div><button class="gear" id="settingsBtn" aria-label="Settings">⚙</button></header>
+<section class="game-card" aria-label="Arithmetic game">
+<div class="card-top"><div class="level">LEVEL <strong id="level">1</strong></div><div class="timer-wrap"><div><div class="timer-label">TIME LEFT</div><div class="timer" id="timer">30</div></div></div></div>
+<div class="progress"><div class="progress-fill" id="progress"></div></div>
+<div class="question-box"><div class="question-label">SOLVE THIS</div><div class="question" id="question">12 + 8 = ?</div></div>
+<div class="answers" id="answers">
+<button class="answer" type="button">20</button><button class="answer" type="button">18</button><button class="answer" type="button">22</button><button class="answer" type="button">16</button>
+</div>
+<div class="feedback" id="feedback" aria-live="polite"></div>
+<div class="controls" id="controls"><button class="control primary" id="startBtn">START GAME</button></div>
+<p class="hint">Solve correctly to reach the next level. Every level gives you 30 seconds.</p>
+</section>
+</main>
+<div class="modal" id="settingsModal" hidden><div class="modal-card"><div class="modal-head"><h2>Settings</h2><button class="close" id="closeSettings" aria-label="Close">×</button></div><label class="setting-row" for="soundToggle"><span>Sound Effects</span><input id="soundToggle" type="checkbox" checked></label></div></div>
+<div class="modal" id="resultModal" hidden><div class="modal-card result-card"><div class="result-icon">⏱</div><h2 id="resultTitle">Time's up!</h2><p id="resultText">You reached Level 1.</p><button class="control primary" id="playAgainBtn">PLAY AGAIN</button></div></div>
+<script>
+const $=id=>document.getElementById(id);
+const levelEl=$('level'),timerEl=$('timer'),progressEl=$('progress'),questionEl=$('question'),answersEl=$('answers'),feedbackEl=$('feedback'),controlsEl=$('controls');
+let level=1,timeLeft=30,countdown=null,actionTimeout=null,gameStarted=false,gamePaused=false,answered=false,transitioning=false,correctAnswer=0,questionText='',previousOptions=[],pendingAction=null,audioContext=null;
+function getAudio(){if(!audioContext){const AC=window.AudioContext||window.webkitAudioContext;if(AC)audioContext=new AC()}if(audioContext&&audioContext.state==='suspended')audioContext.resume();return audioContext}
+function tone(freq,delay,duration,volume,type){const ctx=getAudio();if(!ctx||!$('soundToggle').checked)return;const osc=ctx.createOscillator(),gain=ctx.createGain();osc.type=type||'sine';osc.frequency.setValueAtTime(freq,ctx.currentTime+delay);gain.gain.setValueAtTime(.0001,ctx.currentTime+delay);gain.gain.exponentialRampToValueAtTime(volume,ctx.currentTime+delay+.025);gain.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+delay+duration);osc.connect(gain);gain.connect(ctx.destination);osc.start(ctx.currentTime+delay);osc.stop(ctx.currentTime+delay+duration+.03)}
+function correctSound(){tone(523.25,0,.18,.22,'sine');tone(659.25,.14,.18,.22,'sine');tone(783.99,.28,.24,.22,'sine')}
+function wrongSound(){tone(220,0,.2,.2,'triangle');tone(165,.18,.25,.2,'triangle')}
+function updateTimer(){timerEl.textContent=timeLeft;timerEl.className='timer'+(timeLeft<=10?' red':timeLeft<=20?' yellow':'');progressEl.style.width=(timeLeft/30*100)+'%';progressEl.style.background=timeLeft<=10?'var(--red)':timeLeft<=20?'var(--yellow)':'var(--green)'}
+function stopCountdown(){if(countdown){clearInterval(countdown);countdown=null}}
+function startCountdown(){stopCountdown();countdown=setInterval(()=>{if(!gameStarted||gamePaused||transitioning)return;timeLeft--;updateTimer();if(timeLeft<=0){stopCountdown();endGame()}},1000)}
+function setControls(mode){controlsEl.innerHTML='';const add=(label,id,cls,fn)=>{const b=document.createElement('button');b.className='control '+cls;b.id=id;b.textContent=label;b.type='button';b.addEventListener('click',fn);controlsEl.appendChild(b)};if(mode==='ready')add('START GAME','startBtn','primary',startGame);if(mode==='running')add('STOP','stopBtn','secondary',stopGame);if(mode==='paused'){add('RESUME','resumeBtn','primary',resumeGame);add('RESTART','restartBtn','secondary',restartGame)}if(mode==='finished')add('PLAY AGAIN','againBtn','primary',restartGame)}
+function makeQuestion(){let a,b,op;if(level<=2){a=rand(5,35);b=rand(3,25);op='+';correctAnswer=a+b}else if(level<=4){a=rand(15,60);b=rand(3,a-2);op='−';correctAnswer=a-b}else{a=rand(3,15);b=rand(3,12);op='×';correctAnswer=a*b}questionText=a+' '+op+' '+b+' = ?';questionEl.textContent=questionText;levelEl.textContent=level;makeOptions(false);feedbackEl.textContent='';feedbackEl.className='feedback';answered=false;transitioning=false}
+function rand(min,max){return Math.floor(Math.random()*(max-min+1))+min}
+function makeOptions(change=false){const old=change?previousOptions.slice():[];const choices=new Set([correctAnswer]);let attempts=0;while(choices.size<4&&attempts<500){attempts++;let offset=rand(1,Math.max(8,Math.round(correctAnswer*.35)));let val=correctAnswer+(Math.random()<.5?-offset:offset);if(val>=0&&!old.includes(val))choices.add(val)}while(choices.size<4)choices.add(correctAnswer+choices.size+rand(2,8));const arr=[...choices];for(let i=arr.length-1;i>0;i--){const j=rand(0,i);[arr[i],arr[j]]=[arr[j],arr[i]]}previousOptions=arr.slice();answersEl.innerHTML='';arr.forEach(value=>{const btn=document.createElement('button');btn.type='button';btn.className='answer';btn.textContent=value;btn.disabled=!gameStarted||gamePaused||transitioning;btn.addEventListener('click',()=>checkAnswer(value));answersEl.appendChild(btn)})}
+function enableAnswers(enabled){answersEl.querySelectorAll('button').forEach(b=>b.disabled=!enabled)}
+function beginTransition(kind){transitioning=true;pendingAction=kind;stopCountdown();enableAnswers(false);actionTimeout=setTimeout(finishTransition,2000)}
+function finishTransition(){actionTimeout=null;if(!gameStarted||gamePaused)return;const kind=pendingAction;pendingAction=null;if(kind==='correct'){level++;makeQuestion()}else if(kind==='wrong'){makeOptions(true);questionEl.textContent=questionText;feedbackEl.textContent='';feedbackEl.className='feedback';answered=false;transitioning=false}timeLeft=30;updateTimer();enableAnswers(true);startCountdown()}
+function checkAnswer(value){if(!gameStarted||gamePaused||answered||transitioning)return;getAudio();answered=true;enableAnswers(false);if(value===correctAnswer){correctSound();feedbackEl.textContent='✓ CORRECT! NEXT LEVEL...';feedbackEl.className='feedback correct-text';beginTransition('correct')}else{wrongSound();feedbackEl.textContent='✕ WRONG ANSWER! TRY AGAIN';feedbackEl.className='feedback wrong-text';beginTransition('wrong')}}
+function startGame(){getAudio();gameStarted=true;gamePaused=false;level=1;timeLeft=30;pendingAction=null;makeQuestion();updateTimer();setControls('running');enableAnswers(true);startCountdown()}
+function stopGame(){if(!gameStarted||gamePaused)return;gamePaused=true;stopCountdown();if(actionTimeout){clearTimeout(actionTimeout);actionTimeout=null}setControls('paused');enableAnswers(false)}
+function resumeGame(){if(!gameStarted||!gamePaused)return;gamePaused=false;setControls('running');if(pendingAction){actionTimeout=setTimeout(finishTransition,2000)}else{enableAnswers(!answered&&!transitioning);startCountdown()}}
+function restartGame(){stopCountdown();if(actionTimeout)clearTimeout(actionTimeout);actionTimeout=null;pendingAction=null;gameStarted=false;gamePaused=false;answered=false;transitioning=false;level=1;timeLeft=30;updateTimer();makeQuestion();setControls('ready');enableAnswers(false);$('resultModal').hidden=true}
+function endGame(){gameStarted=false;gamePaused=false;transitioning=false;pendingAction=null;enableAnswers(false);setControls('finished');$('resultTitle').textContent="Time's up!";$('resultText').textContent='You reached Level '+level+'. Ready for another round?';$('resultModal').hidden=false}
+$('settingsBtn').addEventListener('click',()=>$('settingsModal').hidden=false);$('closeSettings').addEventListener('click',()=>$('settingsModal').hidden=true);$('settingsModal').addEventListener('click',e=>{if(e.target===$('settingsModal'))$('settingsModal').hidden=true});$('playAgainBtn').addEventListener('click',restartGame);
+makeQuestion();setControls('ready');updateTimer();enableAnswers(false);
+</script>
 </body>
 </html>
