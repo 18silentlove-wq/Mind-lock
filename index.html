@@ -1,68 +1,95 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#090d1c">
-  <meta name="description" content="MINDLOCK — a fun and challenging math puzzle game.">
-  <title>MINDLOCK — Challenge Your Mind</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101522">
+  <meta name="description" content="MINDLOCK is an offline logic puzzle. Crack the hidden colour code using clues and deduction.">
+  <title>MINDLOCK — Crack the Code</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="ambient ambient-one"></div>
-  <div class="ambient ambient-two"></div>
-  <header class="topbar">
-    <a class="brand" href="#" aria-label="MINDLOCK home"><span class="brand-mark">M</span><span>MIND<span class="brand-accent">LOCK</span></span></a>
-    <div class="top-tag"><span class="live-dot"></span> BRAIN TRAINING</div>
-  </header>
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="MINDLOCK home"><span class="brand-icon">M</span><span>MINDLOCK</span></a>
+      <span class="offline-tag"><i></i> OFFLINE PUZZLE</span>
+    </header>
 
-  <main class="layout">
-    <section class="intro">
-      <p class="eyebrow">THINK FAST. PLAY SMART.</p>
-      <h1>Unlock the power<br>of your <span>mind.</span></h1>
-      <p class="intro-copy">A quick math challenge. Four choices. One sharp mind. How far can you go?</p>
-      <div class="feature-row">
-        <div class="feature"><span class="feature-icon">⚡</span><span>Quick thinking</span></div>
-        <div class="feature"><span class="feature-icon">✦</span><span>Daily challenge</span></div>
-      </div>
-    </section>
+    <main>
+      <section class="intro">
+        <p class="eyebrow">LOGIC · DEDUCTION · STRATEGY</p>
+        <h1>Crack the <span>code.</span></h1>
+        <p class="intro-copy">A secret sequence is locked. Use the clues, think carefully, and unlock it before your attempts run out.</p>
+      </section>
 
-    <section class="game-card" aria-label="Math challenge game">
-      <div class="card-head">
-        <div><p class="card-kicker">MINDLOCK ARENA</p><h2>Math Rush</h2></div>
-        <div class="level-pill">LEVEL <strong>01</strong></div>
-      </div>
-      <div class="game-meta">
-        <div class="meta-box"><span class="meta-label">SCORE</span><strong id="score">000</strong></div>
-        <div class="meta-box timer-box"><span class="meta-label">TIME</span><strong id="time">20s</strong></div>
-        <label class="timer-setting">ROUND
-          <select id="duration" aria-label="Round duration">
-            <option value="10">10 sec</option>
-            <option value="20" selected>20 sec</option>
-          </select>
-        </label>
-      </div>
-      <div class="progress-track"><div class="progress-fill" id="progress"></div></div>
-      <div class="question-area">
-        <p class="question-label">SOLVE THIS</p>
-        <div class="equation" id="equation">8 <span>+</span> 7 <span>=</span> ?</div>
-        <p class="question-hint" id="questionHint">Choose the correct answer</p>
-      </div>
-      <div class="answers" id="answers">
-        <button class="answer" data-answer="13">13</button>
-        <button class="answer" data-answer="14">14</button>
-        <button class="answer" data-answer="15">15</button>
-        <button class="answer" data-answer="16">16</button>
-      </div>
-      <div class="game-actions">
-        <button class="help-button" id="helpButton" type="button">? How to play</button>
-        <button class="start-button" id="startButton" type="button">Start challenge <span>→</span></button>
-      </div>
-      <p class="feedback" id="feedback" aria-live="polite">Press Start Challenge when you're ready.</p>
-    </section>
-  </main>
-  <footer><span>© 2026 MINDLOCK</span><span>CHALLENGE YOUR MIND <b>✦</b></span></footer>
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+      <section class="game-layout" aria-label="Mastermind logic puzzle">
+        <div class="board-card">
+          <div class="board-heading">
+            <div><p class="section-label">THE CHALLENGE</p><h2>Codebreaker</h2></div>
+            <div class="attempt-counter"><strong id="attemptsLeft">10</strong><span>TRIES LEFT</span></div>
+          </div>
+
+          <div class="legend">
+            <span><i class="peg exact"></i> Right colour, right place</span>
+            <span><i class="peg close"></i> Right colour, wrong place</span>
+          </div>
+
+          <div id="history" class="history" aria-live="polite">
+            <div class="empty-state"><span class="lock-symbol">⌁</span><strong>Your attempts will appear here</strong><small>Choose four colours below to make your first guess.</small></div>
+          </div>
+
+          <div class="current-guess">
+            <div class="guess-title"><span class="section-label">YOUR GUESS</span><span id="selectionCount">0 / 4 selected</span></div>
+            <div id="slots" class="slots" aria-label="Current four colour slots">
+              <button class="slot" data-slot="0" aria-label="Slot 1, empty">+</button>
+              <button class="slot" data-slot="1" aria-label="Slot 2, empty">+</button>
+              <button class="slot" data-slot="2" aria-label="Slot 3, empty">+</button>
+              <button class="slot" data-slot="3" aria-label="Slot 4, empty">+</button>
+            </div>
+            <p class="helper" id="helper">Pick four different colours. Tap a filled slot to remove it.</p>
+            <div class="palette-title"><span class="section-label">COLOUR KEYS</span><span>6 colours · no repeats</span></div>
+            <div id="palette" class="palette" aria-label="Choose a colour"></div>
+            <div class="actions">
+              <button id="clearBtn" class="button secondary" type="button">Clear</button>
+              <button id="submitBtn" class="button primary" type="button" disabled>Submit guess <span>→</span></button>
+            </div>
+          </div>
+        </div>
+
+        <aside class="side-column">
+          <div class="info-card">
+            <p class="section-label">HOW TO PLAY</p>
+            <h3>Read the clues.</h3>
+            <ol class="rules">
+              <li><b>01</b><span>Find the hidden sequence of four different colours.</span></li>
+              <li><b>02</b><span>Choose four colours and submit your guess.</span></li>
+              <li><b>03</b><span>Use the clue pegs to improve your next guess.</span></li>
+            </ol>
+          </div>
+          <div class="info-card objective">
+            <span class="target-icon">◎</span>
+            <p class="section-label">YOUR OBJECTIVE</p>
+            <h3>Think. Test. Unlock.</h3>
+            <p>Break the code in 10 attempts. Every guess gives you information.</p>
+          </div>
+          <button id="newGameBtn" class="button restart" type="button">↻ Start new game</button>
+        </aside>
+      </section>
+    </main>
+
+    <footer><span>© 2026 MINDLOCK</span><span>BUILT FOR CURIOUS MINDS</span></footer>
+  </div>
+
+  <div id="resultModal" class="modal" hidden>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="resultTitle">
+      <div id="resultIcon" class="result-icon">✦</div>
+      <p class="section-label">CHALLENGE COMPLETE</p>
+      <h2 id="resultTitle">Code cracked!</h2>
+      <p id="resultText">You solved the puzzle.</p>
+      <div id="secretReveal" class="secret-reveal"></div>
+      <button id="playAgainBtn" class="button primary" type="button">Play again <span>→</span></button>
+    </div>
+  </div>
   <script src="script.js"></script>
 </body>
 </html>
